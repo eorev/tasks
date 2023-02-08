@@ -12,6 +12,7 @@ function App(): JSX.Element {
                 automatically reload.
             </p>
             <h1>Ethan Orevillo</h1>
+            <h2>Hello World</h2>
         </div>
     );
 }
