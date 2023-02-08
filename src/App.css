@@ -37,3 +37,13 @@
         transform: rotate(360deg);
     }
 }
+
+.headerTwo {
+    background-color: #61dafb;
+}
+
+.rectangle {
+    width: 80%;
+    height: 100px;
+    background-color: red;
+}
