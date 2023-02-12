@@ -5,31 +5,28 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 function App(): JSX.Element {
     return (
         <div className="App">
-            <header className="App-header">
-                UD CISC275 with React Hooks and TypeScript
-            </header>
-            <header className="headerTwo">
-                <h1>This is my second header.</h1>
-                <img src="https://picsum.photos/20/30" alt="lorem picsum" />
+            <header>
+                <h1>CISC275</h1>
+                <img src="https://picsum.photos/200/300" alt="lorem picsum" />
                 <ul className="headerTwo__list">
                     <li>First item</li>
                     <li>Second item</li>
                     <li>Third item</li>
                 </ul>
                 <Button onClick={() => console.log("Hello World!")}>
-                    Click Me!
+                    Log Hello World
                 </Button>
             </header>
-            <h1>Ethan Orevillo</h1>
-            <h2>Hello World</h2>
+            <p>Ethan Orevillo</p>
+            <p>Hello World</p>
             <Container>
                 <Row>
                     <Col>
-                        <h1>First Column</h1>
+                        <p>First Column</p>
                         <div className="rectangle"></div>
                     </Col>
                     <Col>
-                        <h1>Second Column</h1>
+                        <p>Second Column</p>
                         <div className="rectangle"></div>
                     </Col>
                 </Row>
