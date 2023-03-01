@@ -87,7 +87,7 @@ export function makeMath(addends: number[]): string {
     if (addends.length === 0) {
         return "0=0";
     }
-    let sum: number = addends.reduce(
+    const sum: number = addends.reduce(
         (accumulator: number, currentValue: number): number =>
             accumulator + currentValue,
         0
@@ -104,27 +104,27 @@ export function makeMath(addends: number[]): string {
  * For instance, the array [1, 9, -5, 7] would become [1, 9, -5, 10, 7]
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  * And the array [1, 2, 3] would become [1, 2, 3, 6]
-*/
+ */
 export function injectPositive(values: number[]): number[] {
-  let sum = 0;
-  let negativeFound = false;
-  let result: number[] = [];
+    let sum = 0;
+    let negativeFound = false;
+    const result: number[] = [];
 
-  for (let i = 0; i < values.length; i++) {
-    const value = values[i];
-    if (value < 0 && !negativeFound) {
-      negativeFound = true;
-      result.push(value);
-      result.push(sum);
-    } else {
-      sum += value;
-      result.push(value);
+    for (let i = 0; i < values.length; i++) {
+        const value = values[i];
+        if (value < 0 && !negativeFound) {
+            negativeFound = true;
+            result.push(value);
+            result.push(sum);
+        } else {
+            sum += value;
+            result.push(value);
+        }
     }
-  }
 
-  if (!negativeFound) {
-    result.push(sum);
-  }
+    if (!negativeFound) {
+        result.push(sum);
+    }
 
-  return result;
+    return result;
 }
