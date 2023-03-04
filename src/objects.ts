@@ -35,6 +35,7 @@ export function isCorrect(question: Question, answer: string): boolean {
     } else if (question.type === "multiple_choice_question") {
         return question.expected === answer;
     }
+    return false;
 }
 
 /**
@@ -49,6 +50,7 @@ export function isValid(question: Question, answer: string): boolean {
     } else if (question.type === "multiple_choice_question") {
         return question.options.includes(answer);
     }
+    return false;
 }
 
 /**
@@ -58,7 +60,7 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
-    return "";
+    return `${question.id}: ${question.name.substring(0, 10)}`;
 }
 
 /**
