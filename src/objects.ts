@@ -18,7 +18,7 @@ export function makeBlankQuestion(
         expected: "",
         options: [],
         points: 1,
-        published: false,
+        published: false
     };
 }
 
@@ -31,7 +31,10 @@ export function makeBlankQuestion(
  */
 export function isCorrect(question: Question, answer: string): boolean {
     if (question.type === "short_answer_question") {
-        return question.expected.toLowerCase().trim() === answer.toLowerCase().trim();
+        return (
+            question.expected.toLowerCase().trim() ===
+            answer.toLowerCase().trim()
+        );
     } else if (question.type === "multiple_choice_question") {
         return question.expected === answer;
     }
@@ -84,9 +87,9 @@ export function toShortForm(question: Question): string {
 export function toMarkdown(question: Question): string {
     let str = `# ${question.name}\n${question.body}`;
     if (question.type === "multiple_choice_question") {
-    question.options.forEach((option) => {
-      str += `\n- ${option}`;
-    });
+        question.options.forEach((option) => {
+            str += `\n- ${option}`;
+        });
     }
     return str;
 }
@@ -98,7 +101,7 @@ export function toMarkdown(question: Question): string {
 export function renameQuestion(question: Question, newName: string): Question {
     return {
         ...question,
-        name: newName,
+        name: newName
     };
 }
 
@@ -123,8 +126,8 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
         ...oldQuestion,
         id,
         name: `Copy of ${oldQuestion.name}`,
-        published: false,
-  };
+        published: false
+    };
 }
 
 /**
@@ -137,8 +140,8 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
 export function addOption(question: Question, newOption: string): Question {
     return {
         ...question,
-        options: [...question.options, newOption],
-  };
+        options: [...question.options, newOption]
+    };
 }
 
 /**
@@ -154,12 +157,12 @@ export function mergeQuestion(
     name: string,
     contentQuestion: Question,
     { points }: { points: number }
-    ): Question {
-        return {
-            ...contentQuestion,
-            id,
-            name,
-            points,
-            published: false,
-        };
-    }
+): Question {
+    return {
+        ...contentQuestion,
+        id,
+        name,
+        points,
+        published: false
+    };
+}
