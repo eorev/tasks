@@ -80,6 +80,7 @@ export function toShortForm(question: Question): string {
  * ------------------------------
  * Check the unit tests for more examples of what this looks like!
  */
+//@todo: fix this
 export function toMarkdown(question: Question): string {
     let result = `# ${question.name}\n${question.body}\n`;
     if (question.type === "multiple_choice_question") {
@@ -105,6 +106,7 @@ export function renameQuestion(question: Question, newName: string): Question {
  * should be inverted. If the question was not published, now it should be
  * published; if it was published, now it should be not published.
  */
+//@todo: fix this
 export function publishQuestion(question: Question): Question {
     let newQuestion: Question = question;
     if (question.published) {
@@ -138,7 +140,9 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    return question;
+    let newQuestion: Question = question;
+    newQuestion.options.push(newOption);
+    return newQuestion;
 }
 
 /**
