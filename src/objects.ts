@@ -82,13 +82,13 @@ export function toShortForm(question: Question): string {
  */
 //@todo: fix this
 export function toMarkdown(question: Question): string {
-    let result = `# ${question.name}\n${question.body}\n`;
+    let str = `# ${question.name}\n${question.body}`;
     if (question.type === "multiple_choice_question") {
-        for (let i = 0; i < question.options.length; i++) {
-            result += `- ${question.options[i]}\n`;
-        }
+    question.options.forEach((option) => {
+      str += `\n- ${option}`;
+    });
     }
-    return result;
+    return str;
 }
 
 /**
@@ -96,9 +96,10 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    let newQuestion: Question = question;
-    newQuestion.name = newName;
-    return newQuestion;
+    return {
+        ...question,
+        name: newName,
+    };
 }
 
 /**
@@ -108,14 +109,7 @@ export function renameQuestion(question: Question, newName: string): Question {
  */
 //@todo: fix this
 export function publishQuestion(question: Question): Question {
-    let newQuestion: Question = question;
-    if (question.published) {
-        newQuestion.published = false;
-    }
-    else {
-        newQuestion.published = true;
-    }
-    return newQuestion;
+    return { ...question, published: !question.published };
 }
 
 /**
@@ -125,11 +119,12 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    let newQuestion: Question = oldQuestion;
-    newQuestion.id = id;
-    newQuestion.name = "Copy of " + oldQuestion.name;
-    newQuestion.published = false;
-    return newQuestion;
+    return {
+        ...oldQuestion,
+        id,
+        name: `Copy of ${oldQuestion.name}`,
+        published: false,
+  };
 }
 
 /**
@@ -140,9 +135,10 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    let newQuestion: Question = question;
-    newQuestion.options.push(newOption);
-    return newQuestion;
+    return {
+        ...question,
+        options: [...question.options, newOption],
+  };
 }
 
 /**
@@ -158,6 +154,12 @@ export function mergeQuestion(
     name: string,
     contentQuestion: Question,
     { points }: { points: number }
-): Question {
-    return contentQuestion;
-}
+    ): Question {
+        return {
+            ...contentQuestion,
+            id,
+            name,
+            points,
+            published: false,
+        };
+    }
