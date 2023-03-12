@@ -23,7 +23,7 @@ export const getNonEmptyQuestions = (questions: Question[]): Question[] => {
  * question is not found, return `null` instead.
  */
 export function findQuestion(questions: Question[], id: number): Question | null {
-    return questions.find(question => question.id === id) || null
+    return questions.find(question => question.id === id) || null;
 }
 
 /**
@@ -31,7 +31,7 @@ export function findQuestion(questions: Question[], id: number): Question | null
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return questions.filter(question => question.id !== id)
+    return questions.filter(question => question.id !== id);
 }
 
 /***
@@ -39,14 +39,14 @@ export function removeQuestion(questions: Question[], id: number): Question[] {
  * questions, as an array.
  */
 export function getNames(questions: Question[]): string[] {
-    return questions.map(question => question.name)
+    return questions.map(question => question.name);
 }
 
 /***
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    return questions.map(question => question.points).reduce((sum, cur) => sum + cur, 0)
+    return questions.map(question => question.points).reduce((sum, cur) => sum + cur, 0);
 }
 
 /***
@@ -55,10 +55,10 @@ export function sumPoints(questions: Question[]): number {
 export function sumPublishedPoints(questions: Question[]): number {
     return questions.map((question) => {
         if (question.published) {
-            return question.points
+            return question.points;
         }
         return 0
-    }).reduce((sum, cur) => sum + cur, 0)
+    }).reduce((sum, cur) => sum + cur, 0);
 }
 
 /***
@@ -82,9 +82,9 @@ export function toCSV(questions: Question[]): string {
     let csvString = 'id,name,options,points,published\n'
     csvString += questions.map(question => {
         return `${question.id},${question.name},${question.options.length},${question.points},${question.published}`
-    }).join('\n')
+    }).join('\n');
 
-    return csvString
+    return csvString;
 }
 
 /**
@@ -111,7 +111,7 @@ export function publishAll(questions: Question[]): Question[] {
     return questions.map(question => {
         return {
             ...question,
-            published: true
+            published: true,
         }
     })
 }
@@ -121,7 +121,7 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return questions.every(question => question.type === questions[0].type)
+    return questions.every(question => question.type === questions[0].type);
 }
 
 /***
@@ -146,7 +146,7 @@ export function addNewQuestion(
             points: 1,
             published: false
         }
-    ]
+    ];
 }
 
 /***
@@ -166,7 +166,7 @@ export function renameQuestionById(
                 name: newName
             }
         }
-        return question
+        return question;
     })
 }
 
@@ -224,12 +224,12 @@ export function editOption(
                         if (index === targetOptionIndex) {
                             return newOption
                         }
-                        return option
+                        return option;
                     })
                 }
             }
         }
-        return question
+        return question;
     })
 }
 
@@ -255,6 +255,6 @@ export function duplicateQuestionInArray(
                 }
             ]
         }
-        return question
+        return question;
     })
 }
