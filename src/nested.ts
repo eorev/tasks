@@ -14,14 +14,9 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * considered "non-empty". An empty question has an empty string for its `body` and
  * `expected`, and an empty array for its `options`.
  */
-export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return questions.filter(question => {
-        return (
-            question.body !== '' &&
-            question.expected !== '' &&
-            question.options.length > 0
-        )})
-}
+export const getNonEmptyQuestions = (questions: Question[]): Question[] => {
+  return questions.filter(q => q.body !== "" || q.options.length > 0 || q.expected !== "");
+};
 
 /***
  * Consumes an array of questions and returns the question with the given `id`. If the
@@ -183,11 +178,20 @@ export function renameQuestionById(
  * must be set to an empty list.
  */
 export function changeQuestionTypeById(
-    questions: Question[],
-    targetId: number,
-    newQuestionType: QuestionType
+  questions: Question[],
+  targetId: number,
+  newQuestionType: QuestionType
 ): Question[] {
-    return [];
+  return questions.map(question =>
+    question.id === targetId
+      ? {
+          ...question,
+          type: newQuestionType,
+          options:
+            newQuestionType === 'multiple_choice_question' ? question.options : [],
+        }
+      : question
+  );
 }
 
 /**
@@ -206,7 +210,27 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map(question => {
+        if (question.id === targetId) {
+            if (targetOptionIndex === -1) {
+                return {
+                    ...question,
+                    options: [...question.options, newOption]
+                }
+            } else {
+                return {
+                    ...question,
+                    options: question.options.map((option, index) => {
+                        if (index === targetOptionIndex) {
+                            return newOption
+                        }
+                        return option
+                    })
+                }
+            }
+        }
+        return question
+    })
 }
 
 /***
@@ -220,5 +244,17 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    return questions.flatMap(question => {
+        if (question.id === targetId) {
+            return [question, 
+                {
+                    ...question,
+                    id: newId,
+                    name: `Copy of ${question.name}`,
+                    published: false
+                }
+            ]
+        }
+        return question
+    })
 }
