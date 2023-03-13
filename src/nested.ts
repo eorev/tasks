@@ -140,7 +140,18 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    return [...questions, 
+        {
+            id: id,
+            name: name,
+            type: type,
+            body: '',
+            expected: '',
+            options: [],
+            points: 1,
+            published: false
+        }
+    ]
 }
 
 /***
