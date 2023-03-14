@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { Button } from "react-bootstrap";
 import { ChangeType } from "./components/ChangeType";
 import { RevealAnswer } from "./components/RevealAnswer";
 import { StartAttempt } from "./components/StartAttempt";
@@ -18,6 +19,13 @@ function App(): JSX.Element {
                     <li>Second item</li>
                     <li>Third item</li>
                 </ul>
+                <Button
+                    onClick={() => {
+                        console.log("Hello World!");
+                    }}
+                >
+                    Log Hello World
+                </Button>
             </header>
             <hr></hr>
             <Counter></Counter>

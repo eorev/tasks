@@ -41,7 +41,7 @@ export function TwoDice(): JSX.Element {
             </Button>
             <span data-testid="left-die">{die1}</span>
             <span data-testid="right-die">{die2}</span>
-            <h1>{decision()}</h1>
+            <span>{decision()}</span>
         </div>
     );
 }

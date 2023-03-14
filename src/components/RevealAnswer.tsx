@@ -13,7 +13,7 @@ export function RevealAnswer(): JSX.Element {
             >
                 Reveal Answer
             </Button>
-            {visible && <h1>42</h1>}
+            {visible && <span>42</span>}
         </div>
     );
 }
