@@ -16,7 +16,9 @@ function App(): JSX.Element {
     return (
         <div className="App">
             <header>
-                <h1>CISC275</h1>
+                <h1 data-testid="heading" role={"heading"}>
+                    CISC275
+                </h1>
                 <img src="https://picsum.photos/200/300" alt="lorem picsum" />
                 <ul className="headerTwo__list">
                     <li>First item</li>

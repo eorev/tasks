@@ -45,7 +45,7 @@ export function ColoredBox(): JSX.Element {
 
     return (
         <div>
-            <h3>Colored Box</h3>
+            <span>Colored Box</span>
             <span>The current color is: {COLORS[DEFAULT_COLOR_INDEX]}</span>
             <div>
                 <ChangeColor
