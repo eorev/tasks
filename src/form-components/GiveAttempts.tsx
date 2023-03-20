@@ -1,46 +1,41 @@
 import React, { useState } from "react";
 
 export function GiveAttempts(): JSX.Element {
-    const [attemptsLeft, setAttemptsLeft] = useState(3);
-    const [requestedAttempts, setRequestedAttempts] = useState(0);
+    const [attempts, setAttempts] = useState(3);
+    const [additionalAttempts, setAdditionalAttempts] = useState(0);
 
-    const handleRequestChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const requested = parseInt(event.target.value, 10);
-        if (!(requested < 0 || isNaN)) {
-            setRequestedAttempts(requested);
+    const useAttempt = () => {
+        if (attempts > 0) {
+            setAttempts(attempts - 1);
         }
     };
 
-    const handleGainAttempts = () => {
-        setAttemptsLeft(attemptsLeft + requestedAttempts);
-        setRequestedAttempts(0);
+    const gainAttempts = () => {
+        if (additionalAttempts > 0) {
+            setAttempts(attempts + additionalAttempts);
+            setAdditionalAttempts(0);
+        }
     };
-
-    const handleUseAttempt = () => {
-        setAttemptsLeft(attemptsLeft - 1);
-    };
-
-    const canUseAttempts = attemptsLeft > 0;
 
     return (
         <div>
             <span>Give Attempts</span>
-            <p>Attempts left: {attemptsLeft}</p>
+            <p>Attempts left: {attempts}</p>
             <label>
                 Request additional attempts:
                 <input
                     type="number"
-                    value={requestedAttempts}
-                    onChange={handleRequestChange}
+                    value={additionalAttempts}
+                    onChange={(e) =>
+                        setAdditionalAttempts(parseInt(e.target.value) || 0)
+                    }
                 />
             </label>
             <br />
-            <button onClick={handleUseAttempt} disabled={!canUseAttempts}>
+            <button onClick={useAttempt} disabled={attempts === 0}>
                 Use attempt
             </button>
-            <button onClick={handleGainAttempts}>Gain attempts</button>
+            <button onClick={gainAttempts}>Gain attempts</button>
         </div>
     );
 }

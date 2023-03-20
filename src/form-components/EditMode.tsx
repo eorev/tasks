@@ -5,52 +5,38 @@ export function EditMode(): JSX.Element {
     const [name, setName] = useState("Your Name");
     const [isStudent, setIsStudent] = useState(true);
 
-    const toggleEditMode = () => {
-        setIsEditMode(!isEditMode);
-    };
-
-    const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-    };
-
-    const handleChangeIsStudent = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsStudent(e.target.checked);
-    };
-
     return (
         <div>
             <span>Edit Mode</span>
+            <div className="form-switch">
+                <input
+                    id="edit-mode-switch"
+                    type="checkbox"
+                    onChange={() => setIsEditMode(!isEditMode)}
+                />
+                <label htmlFor="edit-mode-switch" />
+            </div>
             {isEditMode ? (
-                <form>
-                    <label htmlFor="name">Name: </label>
+                <>
                     <input
                         type="text"
-                        id="name"
                         value={name}
-                        onChange={handleChangeName}
+                        onChange={(e) => setName(e.target.value)}
                     />
-                    <br />
-                    <label htmlFor="isStudent">Is a student: </label>
-                    <input
-                        type="checkbox"
-                        id="isStudent"
-                        checked={isStudent}
-                        onChange={handleChangeIsStudent}
-                    />
-                </form>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={isStudent}
+                            onChange={() => setIsStudent(!isStudent)}
+                        />
+                        Is a student
+                    </label>
+                </>
             ) : (
                 <p>
-                    {name} is {isStudent ? "a" : "not a"} student
+                    {name} is {isStudent ? "a student" : "not a student"}.
                 </p>
             )}
-            <label className="switch">
-                <input
-                    type="checkbox"
-                    checked={isEditMode}
-                    onChange={toggleEditMode}
-                />
-                <span className="slider round"></span>
-            </label>
         </div>
     );
 }

@@ -7,33 +7,25 @@ export function MultipleChoiceQuestion({
     options: string[];
     expectedAnswer: string;
 }): JSX.Element {
-    const [selectedChoice, setSelectedChoice] = useState(options[0]);
-    const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-    const [answerChecked, setAnswerChecked] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(options[0]);
 
-    const handleSelectionChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        setSelectedChoice(event.target.value);
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedOption(event.target.value);
     };
 
-    const checkAnswer = () => {
-        setIsAnswerCorrect(selectedChoice === expectedAnswer);
-        setAnswerChecked(true);
-    };
+    const isCorrect = selectedOption === expectedAnswer;
 
     return (
         <div>
             <span>Multiple Choice Question</span>
-            <select value={selectedChoice} onChange={handleSelectionChange}>
+            <select value={selectedOption} onChange={handleSelect}>
                 {options.map((option, index) => (
                     <option key={index} value={option}>
                         {option}
                     </option>
                 ))}
             </select>
-            <button onClick={checkAnswer}>Check Answer</button>
-            {answerChecked && <span>{isAnswerCorrect ? "✔️" : "❌"}</span>}
+            {isCorrect ? "✔️" : "❌"}
         </div>
     );
 }
